@@ -13,16 +13,16 @@ $$
 
 Where:
 
-* $H(f|m)$ represents the entropy of a datatype form $m$ given a syntactic function $f$.
-* $d$ = a specific datatype like morph (e.g., "N-NSM"), text (e.g, "λόγος") or lemma. 
-* $f$ = a specific syntactic function of the parent phrase (like `Subj`, `Objc`, etc.)
-* $P(f|d)$ = the probability that form $d$ leads to function $f$ measured over the complete N1904-TF dataset.
+* $H(f|d)$ represents the entropy of a datatype form $d$ given a syntactic function $f$.
+* $d$ represents a specific datatype like morph (e.g., "N-NSM"), text (e.g, "λόγος") or lemma. 
+* $f$ represents a specific syntactic function of the parent phrase (like "Subj", "Objc", etc.)
+* $P(f|d)$ = the probability that datatype form $d$ leads to function $f$ measured over the complete N1904-TF dataset.
 
 This gives a measure (in bits) of how unpredictable the function is for a given morph.
 
 ## Example from the N1904-TF dataset
 
-To demonstrate how the entropy is determined, and what it expresses, let us consider the wordform "λόγος" (N-NSM; a Nominative Singular Masculine Noun).
+To demonstrate how the entropy is determined, let's consider the wordform "λόγος" (N-NSM; a Nominative Singular Masculine Noun).
 
 We know that there are 63 occurenses of the form "λόγος" in the N1904-TF dataset.  According to the current syntactic annotation, these occurense of the word "λόγος" are part of a set of possible phrase functions:
 
@@ -65,8 +65,7 @@ This matches what was found by the calculations performe in our notebook, which 
 '0.7910'
 ```
 
-
-That’s a relatively low entropy, meaning the morphological form “λόγος” is strongly predictive of being part of a subject phrase.
+This corresponds to a relatively low entropy, meaning that a *random* occurence of the wordform “λόγος” is strongly predictive of it being part of a subject phrase.
 
 It is important to realize that each words entropy is measured against the whole of the N1904-TF corpus (which is 'hidden' in the $P(f|m)$ of the formal definition). It is likely that the values for entropy of the same morp are different when considered within another corpus.
 
