@@ -67,7 +67,7 @@ This matches what was found by the calculations performe in our notebook, which 
 ```
 
 
-That’s a relatively low entropy, meaning the morphological form “λόγος” is strongly predictive of being a subject.
+That’s a relatively low entropy, meaning the morphological form “λόγος” is strongly predictive of being part of a subject phrase.
 
 It is important to realize that each words entropy is measured against the whole of the N1904-TF corpus (which is 'hidden' in the $P(f|m)$ of the formal definition). It is likely that the values for entropy of the same morp are different when considered within another corpus.
 
