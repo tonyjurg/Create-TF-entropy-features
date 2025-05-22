@@ -22,16 +22,19 @@ This gives a measure (in bits) of how unpredictable the function is for a given 
 
 ## Example from the N1904-TF dataset
 
-Let us consider the form "λόγος" (N-NSM; a Nominative Singular Masculine Noun) occurs 63 times:
+To demonstrate how the entropy is determined, let us consider the form "λόγος" (N-NSM; a Nominative Singular Masculine Noun).
 
-* 55 times as part of a `Subject` phrase
-* 3 times as part of a `Predicate Complement` phrase 
-* 2 time as part of a `Conjunction` phrase  {this is under investigation}
-* 2 times as part of a phrase labeled as 'Unknown' {this is under investigation}
-* 1 time as part of a `Predicate` phrase
+Of the 63 occurenses in the N1904-TF dataset it is:
+
+  * 55 times as part of a `Subject` phrase
+  * 3 times as part of a `Predicate Complement` phrase 
+  * 2 time as part of a `Conjunction` phrase  {this is under investigation}
+  * 2 times as part of a phrase labeled as 'Unknown' {this is under investigation}
+  * 1 time as part of a `Predicate` phrase
 
 
 First, we can calculate the probabilities:
+
 - $P(Subj|\text{λόγος}) = 55 / 63 = 0.873015873015873$
 - $P(PreC|\text{λόγος}) = 3 / 63 = 0.047619047619047616$
 - $P(Pred|\text{λόγος}) = 1 / 63 = 0.015873015873015872$
