@@ -1,21 +1,19 @@
 # About entropy an N1904-TF
 
-In our syntactic annotated Text-Fabric dataset, we could define the concept of entropy as an measures of the uncertainty or variability of how a word predicts or aligns with the syntactic functions (like Subject, Object, etc.) of the phrase the word belongs to.
-
-A a high entropy value ooccurs when a form frequently appears in multiple syntactic functions with comparable probabilities. Such a level of entropy signals ambiguity: the form doesn’t reliably predict any single role for the parent phrase.
-
-on the other hand a low value for entropy arises when a form almost always corresponds to one specific function. Low entropy thus marks the form as a strong, consistent indicator of a specific syntactic role for its parent phrase.
+In our syntactic annotated Text-Fabric dataset, we define entropy as a measure of the uncertainty or variability of how a word predicts or aligns with the syntactic functions (like Subject, Object, etc.) of the phrase it belongs to.
+Entropy reveals the degree to which a word's syntactic behavior is predictable or ambiguous. High entropy values indicate that a form is ambiguous, as it appears in multiple syntactic functions with similar probabilities. In contrast, low entropy values signify that a form is strongly associated with a single syntactic function, making it a reliable indicator of that role within the parent phrase.
 
 ## Formal Definition
 
-The feature value was calculated using *Shannon entropy*, defined as:
+The feature value was calculated using Shannon entropy, defined as:
 
 $$
-H(f|m) = -\sum_{f \in F} P(f|m) \cdot \log_2 P(f|m)
+H(f|d) = -\sum_{f \in F} P(f|d) \cdot \log_2 P(f|d)
 $$
 
 Where:
 
+* $H(f|m)$ represents the entropy of a datatype form $m$ given a syntactic function $f$.
 * $d$ = a specific datatype like morph (e.g., "N-NSM"), text (e.g, "λόγος") or lemma. 
 * $f$ = a specific syntactic function of the parent phrase (like `Subj`, `Objc`, etc.)
 * $P(f|d)$ = the probability that form $d$ leads to function $f$ measured over the complete N1904-TF dataset.
@@ -37,10 +35,10 @@ We know that there are 63 occurenses of the form "λόγος" in the N1904-TF d
 Based on this distribution, we can calculate the probabilities of a *randomly chosen* instance of the wordform "λόγος" to belong to a phrase with a specific phrase function:
 
 - $P(Subj|\text{λόγος}) = 55 / 63 = 0.873015873015873$
-- $P(PreC|\text{λόγος}) = 3 / 63 = 0.047619047619047616$
-- $P(Pred|\text{λόγος}) = 1 / 63 = 0.015873015873015872$
-- $P(Conj|\text{λόγος}) = 2 / 63 = 0.031746031746031744$
-- $P(Unkn|\text{λόγος}) = 2 / 63 = 0.031746031746031744$
+- $P(PreC|\text{λόγος}) = 3 / 63 ≈ 0.047619047619047616$
+- $P(Pred|\text{λόγος}) = 1 / 63 ≈ 0.015873015873015872$
+- $P(Conj|\text{λόγος}) = 2 / 63 ≈ 0.031746031746031744$
+- $P(Unkn|\text{λόγος}) = 2 / 63 ≈ 0.031746031746031744$
 
 Next we can compute the entropy: 
 
@@ -56,9 +54,9 @@ If we calculate each term we get:
 
 So the final entropy can be calculated as:
 
-$$ Entropy = - (-0.1663 - 0.2093 - 0.1581 - 0.1581 - 0.1004) $$
-$$ Entropy = - (-0.7922) $$
-$$ Entropy = 0.7922 $$
+$$ Entropy ≈ - (-0.1663 - 0.2093 - 0.1581 - 0.1581 - 0.1004) $$
+$$ Entropy ≈ - (-0.7922) $$
+$$ Entropy ≈ 0.7922 $$
 
 This matches what was found by the calculations performe in our notebook, which used float numbers (instead of the rounded ones above):
 
