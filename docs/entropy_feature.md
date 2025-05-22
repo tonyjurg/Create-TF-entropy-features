@@ -65,7 +65,7 @@ This matches what was found by the calculations performe in our notebook, which 
 '0.7910'
 ```
 
-This corresponds to a relatively low entropy, meaning that a *random* occurence of the wordform “λόγος” is strongly predictive of it being part of a subject phrase.
+The low entropy value (0.7910) indicates that the wordform (i.e, "λόγος") is strongly associated with one specific phrasefunction.  Hence a *random* occurence of the wordform “λόγος” is strongly predictive of it being part of a subject phrase.
 
 It is important to realize that each words entropy is measured against the whole of the N1904-TF corpus (which is 'hidden' in the $P(f|m)$ of the formal definition). It is likely that the values for entropy of the same morp are different when considered within another corpus.
 
