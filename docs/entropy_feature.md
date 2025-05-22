@@ -1,8 +1,10 @@
-# preliminairy documentation
+# About entropy an N1904-TF
 
-In our Text-Fabric morphology-based setup entropy measures the uncertainty or variability in how a word predicts or aligns with syntactic functions (like Subject, Object, etc.).
+In our syntactic annotated Text-Fabric dataset, we could define the concept of entropy as an measures of the uncertainty or variability of how a word predicts or aligns with the syntactic functions (like Subject, Object, etc.) of the phrase the word belongs to.
 
-If a word (or more precisely, its morphological form) can lead to multiple functions with different probabilities, its entropy is high — meaning there's ambiguity. If it clearly and consistently points to one function, entropy is low — meaning it's a reliable indicator. 
+A a high entropy value ooccurs when a form frequently appears in multiple syntactic functions with comparable probabilities. Such a level of entropy signals ambiguity: the form doesn’t reliably predict any single role for the parent phrase.
+
+on the other hand a low value for entropy arises when a form almost always corresponds to one specific function. Low entropy thus marks the form as a strong, consistent indicator of a specific syntactic role for its parent phrase.
 
 ## Formal Definition
 
@@ -14,26 +16,25 @@ $$
 
 Where:
 
-* $m$ = a specific morphological form (like `N-NSM`)
-* $f$ = a syntactic function (like `Subj`, `Objc`, etc.)
-* $P(f|m)$ = the probability that form $m$ leads to function $f$
+* $d$ = a specific datatype like morph (e.g., "N-NSM"), text (e.g, "λόγος") or lemma. 
+* $f$ = a specific syntactic function of the parent phrase (like `Subj`, `Objc`, etc.)
+* $P(f|d)$ = the probability that form $d$ leads to function $f$ measured over the complete N1904-TF dataset.
 
 This gives a measure (in bits) of how unpredictable the function is for a given morph.
 
 ## Example from the N1904-TF dataset
 
-To demonstrate how the entropy is determined, let us consider the form "λόγος" (N-NSM; a Nominative Singular Masculine Noun).
+To demonstrate how the entropy is determined, and what it expresses, let us consider the wordform "λόγος" (N-NSM; a Nominative Singular Masculine Noun).
 
-Of the 63 occurenses in the N1904-TF dataset it is:
+We know that there are 63 occurenses of the form "λόγος" in the N1904-TF dataset.  According to the current syntactic annotation, these occurense of the word "λόγος" are part of a set of possible phrase functions:
 
-  * 55 times as part of a `Subject` phrase
-  * 3 times as part of a `Predicate Complement` phrase 
-  * 2 time as part of a `Conjunction` phrase  {this is under investigation}
-  * 2 times as part of a phrase labeled as 'Unknown' {this is under investigation}
-  * 1 time as part of a `Predicate` phrase
+  * 55 instances are part of a `Subject` phrase
+  * 3 instances are part of a `Predicate Complement` phrase 
+  * 2 instances are part of a `Conjunction` phrase  {this is under investigation}
+  * 2 instances are part of phrases labeled as 'Unknown' {this is under investigation}
+  * 1 instance is part of a `Predicate` phrase
 
-
-First, we can calculate the probabilities:
+Based on this distribution, we can calculate the probabilities of a *randomly chosen* instance of the wordform "λόγος" to belong to a phrase with a specific phrase function:
 
 - $P(Subj|\text{λόγος}) = 55 / 63 = 0.873015873015873$
 - $P(PreC|\text{λόγος}) = 3 / 63 = 0.047619047619047616$
