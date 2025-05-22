@@ -16,7 +16,7 @@ The Text-Fabric framework is designed to facilitate the analysis and manipulatio
 
 ## Documentation
 
-TBC
+[prelimenair documentation](docs/entropy_feature.md)
 
 ## Attribution and footnotes
 
