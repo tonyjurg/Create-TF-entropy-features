@@ -4,9 +4,9 @@
 
 This repository contains the [Jupyter Notebook](Feature_creation_betacode_for_N1904-TF_dataset.ipynb) used to create three new Text-Fabric feature:
 
-   - [lemma_entr](): Entropy for lemma to parent phrase function in the N1904-TF corpus
-   - [morph_entr](): Entropy for morph to parent phrase function in the N1904-TF corpus
-   - [text_entr](): Entropy for surface text to parent phrase function in the N1904-TF corpus
+   - [lemma_entr](https://tonyjurg.github.io/N1904addons/features/lemma_entr.html): Entropy of the lemma as predictor of its parent phrase function
+   - [morph_entr](https://tonyjurg.github.io/N1904addons/features/morph_entr.html): Entropy of a morph-tag as predictor of its parent phrase function
+   - [text_entr](https://tonyjurg.github.io/N1904addons/features/text_entr.html): Entropy of the surface level wordform as predictor of its parent phrase function
    
 The final feature files will be added to the package available at the [tonyjurg/N1904addons](https://tonyjurg.github.io/N1904addons/) repository.
 
