@@ -17,7 +17,7 @@ The final feature files will be added to the package available at the [tonyjurg/
 
 You can view the production notebook on [nbviewer.org](https://nbviewer.org/github/tonyjurg/Create-TF-entropy-features/blob/main/create_entropy_type2pf_features.ipynb).
 
-Alternative, you can also download it from the [GitHUb repository](https://github.com/tonyjurg/Create-TF-entropy-features/blob/main/create_entropy_type2pf_features.ipynb).
+Alternative, you can also download it from the [GitHub repository](https://github.com/tonyjurg/Create-TF-entropy-features/blob/main/create_entropy_type2pf_features.ipynb).
 
 ## About Text-Fabric
 
