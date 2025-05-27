@@ -1,13 +1,23 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)  [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 # Create TF entropy features
 
-This repository contains the [Jupyter Notebook](Feature_creation_betacode_for_N1904-TF_dataset.ipynb) used to create three new Text-Fabric feature:
+This repository contains the Jupyter Notebook used to create three new Text-Fabric feature:
 
-   - [lemma_entr](https://tonyjurg.github.io/N1904addons/features/lemma_entr.html): Entropy of the lemma as predictor of its parent phrase function
-   - [morph_entr](https://tonyjurg.github.io/N1904addons/features/morph_entr.html): Entropy of a morph-tag as predictor of its parent phrase function
-   - [text_entr](https://tonyjurg.github.io/N1904addons/features/text_entr.html): Entropy of the surface level wordform as predictor of its parent phrase function
+   - [lemma_entr](https://tonyjurg.github.io/N1904addons/features/lemma_entr.html): Absolute entropy of the lemma as predictor of its parent phrase function in bits.
+   - [morph_entr](https://tonyjurg.github.io/N1904addons/features/morph_entr.html): Absolute entropy of the morph as predictor of its parent phrase function in bits.
+   - [text_entr](https://tonyjurg.github.io/N1904addons/features/text_entr.html): Absolute entropy of the surface level wordform as predictor of its parent phrase function in bits.
+   - [lemma_entr_norm](https://tonyjurg.github.io/N1904addons/features/lemma_entr.html): Normalized entropy of the lemma as predictor of its parent phrase function in range [0,1].
+   - [morph_entr_norm](https://tonyjurg.github.io/N1904addons/features/morph_entr.html): Normalized entropy of the morph as predictor of its parent phrase function in range [0,1].
+   - [text_entr_norm](https://tonyjurg.github.io/N1904addons/features/text_entr.html): Normalized entropy of the surface level wordform as predictor of its parent phrase function in range [0,1].
    
 The final feature files will be added to the package available at the [tonyjurg/N1904addons](https://tonyjurg.github.io/N1904addons/) repository.
+
+## Production notebook
+
+You can view the production notebook on [nbviewer.org](https://nbviewer.org/github/tonyjurg/Create-TF-entropy-features/blob/main/create_entropy_type2pf_features.ipynb).
+
+Alternative, you can also download it from the [GitHUb repository](https://github.com/tonyjurg/Create-TF-entropy-features/blob/main/create_entropy_type2pf_features.ipynb).
 
 ## About Text-Fabric
 
