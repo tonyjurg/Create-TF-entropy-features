@@ -39,7 +39,7 @@ The [N1904-TF dataset](https://centerblc.github.io/N1904/) available under [MIT 
 
 ## License
 
-This notebook is released under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://github.com/tonyjurg/Create-TF-entropy-features/blob/main/LICENSE.md)
+This repository is released under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://github.com/tonyjurg/Create-TF-entropy-features/blob/main/LICENSE.md)
 
 ## Citation
 
