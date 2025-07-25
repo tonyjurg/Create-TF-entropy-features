@@ -4,9 +4,9 @@
 
 This repository contains the Jupyter Notebook used to create three new Text-Fabric feature:
 
-   - [lemma_entr](https://tonyjurg.github.io/N1904addons/features/lemma_entr.html): Absolute entropy of the lemma as predictor of its parent phrase function in bits.
-   - [morph_entr](https://tonyjurg.github.io/N1904addons/features/morph_entr.html): Absolute entropy of the morph as predictor of its parent phrase function in bits.
-   - [text_entr](https://tonyjurg.github.io/N1904addons/features/text_entr.html): Absolute entropy of the surface level wordform as predictor of its parent phrase function in bits.
+   - [lemma_entr_mbit](https://tonyjurg.github.io/N1904addons/features/lemma_entr_mbit.html): Absolute entropy of the lemma as predictor of its parent phrase function in milibits.
+   - [morph_entr_mbit](https://tonyjurg.github.io/N1904addons/features/morph_entr_mbit.html): Absolute entropy of the morph as predictor of its parent phrase function in milibits.
+   - [text_entr_mbit](https://tonyjurg.github.io/N1904addons/features/text_entr_mbit.html): Absolute entropy of the surface level wordform as predictor of its parent phrase function in milibits.
    - [lemma_entr_norm](https://tonyjurg.github.io/N1904addons/features/lemma_entr_norm.html): Normalized entropy of the lemma as predictor of its parent phrase function in range [0,1].
    - [morph_entr_norm](https://tonyjurg.github.io/N1904addons/features/morph_entr_norm.html): Normalized entropy of the morph as predictor of its parent phrase function in range [0,1].
    - [text_entr_norm](https://tonyjurg.github.io/N1904addons/features/text_entr_norm.html): Normalized entropy of the surface level wordform as predictor of its parent phrase function in range [0,1].
@@ -25,7 +25,7 @@ The Text-Fabric framework is designed to facilitate the analysis and manipulatio
 
 ## Documentation
 
-[prelimenairy documentation](entropy_feature.md)
+See the individual features.
 
 ## Attribution and footnotes
 
