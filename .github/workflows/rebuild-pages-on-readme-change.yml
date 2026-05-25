@@ -1,0 +1,26 @@
+name: Rebuild GitHub Pages when README.md changes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - README.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  rebuild-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request GitHub Pages build
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.repos.requestPagesBuild({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            });
