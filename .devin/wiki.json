@@ -1,0 +1,147 @@
+{
+  "repo_notes": [
+    {
+      "content": "CRITICAL MATHEMATICAL REQUIREMENT: All pages that discuss entropy MUST render the core Shannon entropy formula and related expressions using proper LaTeX math mode ($$ ... $$ for display, $ ... $ for inline). Never write the formula in plain text or ASCII approximations.\n\nThe canonical definition (from entropy_feature.md) is:\n\n$$H(f|d) = -\\sum_{f \\in F} P(f|d) \\cdot \\log_2 P(f|d)$$\n\nWhere:\n- $H(f|d)$ is the entropy (in bits) of a datatype form $d$ with respect to phrase function $f$\n- $d$ is a specific datatype instance (surface text, morph tag, or lemma)\n- $f$ ranges over the set of phrase functions $F$ (Subj, Objc, PreC, Pred, Conj, etc.)\n- $P(f|d)$ is the empirical conditional probability observed over the entire N1904-TF corpus\n\nAbsolute entropy is stored in millibits: value = round($H \\times 1000$) as integer.\nNormalized entropy is $H / \\log_2(|F|)$ (or the effective support size) scaled to [0,1] and stored as float.\n\nAlways show the worked example for the surface form λόγος (N-NSM) with its probability distribution and the resulting ≈0.791 bits / 791 millibits. Prefer the exact symbols and notation used in entropy_feature.md and the production notebook. Use Greek text (λόγος) correctly when illustrating surface forms.",
+      "author": "Repository maintainer"
+    },
+    {
+      "content": "This repository is a pure feature-generation ETL pipeline. It does not distribute the final features for end-user consumption; those live in tonyjurg/N1904addons. The six features are: lemma_entr_mbit, morph_entr_mbit, text_entr_mbit, lemma_entr_norm, morph_entr_norm, text_entr_norm. Emphasize the distinction between absolute (millibit integer) and normalized ([0,1] float) representations, and the three linguistic keys (lemma / morph / surface text)."
+    }
+  ],
+  "pages": [
+    {
+      "title": "Overview",
+      "purpose": "High-level introduction to the Create-TF-entropy-features repository. Explain that it generates six Text-Fabric features measuring syntactic predictability (entropy of lemma/morph/surface form as predictor of parent phrase function) for the Nestle 1904 Greek New Testament. List the six features in a clear table, note the N1904addons ecosystem relationship, and link to the Information-Theory Background and Feature Generation Pipeline sections.",
+      "page_notes": [
+        {
+          "content": "Include a compact table of the six features (name, linguistic key, unit/range). Mention that absolute values are stored in millibits (integer) and normalized values in [0,1] (float)."
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "purpose": "Setup instructions, required external dependencies (Text-Fabric, N1904-TF dataset, numpy, pickle), repository layout, and the staging-area workflow defined in .gitignore. Clarify that generated .tf files are intended for integration into N1904addons rather than direct end-user loading from this repo.",
+      "parent": "Overview"
+    },
+    {
+      "title": "Repository Structure and Licensing",
+      "purpose": "Describe every important file and directory (production notebook, analysis notebooks, tf/1.0.0/, P_f_given_datatype.pkl, images/, LICENSE.md, CITATION.cff, entropy_feature.md). State the CC BY 4.0 license clearly and note the attribution requirements for the underlying Nestle 1904 text and N1904-TF dataset.",
+      "parent": "Overview"
+    },
+    {
+      "title": "Information-Theory Background",
+      "purpose": "Conceptual overview of the information-theoretic foundation. Introduce Shannon entropy as a measure of syntactic unpredictability, the notions of absolute entropy (bits / millibits) and normalized entropy, and the mapping from linguistic type (lemma/morph/text) to parent phrase function. Link to the two detailed child pages that contain the formal mathematics and the scale definitions.",
+      "page_notes": [
+        {
+          "content": "Keep this page conceptual. Defer the full LaTeX definition of H(f|d) and the worked example to the child page 'Entropy and Phrase-Function Prediction'. Still mention that the core quantity is the conditional entropy of phrase function given a datatype form."
+        }
+      ]
+    },
+    {
+      "title": "Entropy and Phrase-Function Prediction",
+      "purpose": "Formal mathematical treatment of how entropy quantifies syntactic predictability. MUST include the exact Shannon entropy definition using proper LaTeX, explain every symbol, and present the complete worked example for the surface form λόγος (including the observed counts, the five probabilities, the term-by-term calculation, and the final ≈0.791 bits). Emphasize that probabilities are estimated over the entire N1904-TF corpus.",
+      "parent": "Information-Theory Background",
+      "page_notes": [
+        {
+          "content": "MANDATORY LaTeX rendering:\n\nDisplay the definition prominently:\n\n$$H(f|d) = -\\sum_{f \\in F} P(f|d) \\cdot \\log_2 P(f|d)$$\n\nThen give the symbol table exactly as in entropy_feature.md. Follow with the full λόγος example (63 occurrences: 55 Subj, 3 PreC, 2 Conj, 2 Unkn, 1 Pred). Show the probability calculations, the individual $p \\log_2 p$ terms, and the final summation that yields ≈0.7910 bits. Prefer the notation and numbers from entropy_feature.md. Make clear that low entropy means the form is a strong predictor of one particular phrase function."
+        }
+      ]
+    },
+    {
+      "title": "Absolute vs. Normalized Entropy (mbit and norm)",
+      "purpose": "Explain the two output representations produced by the pipeline. Absolute entropy is converted to millibits (H × 1000, rounded to integer) for compact integer storage in Text-Fabric. Normalized entropy scales H by the theoretical maximum (log₂ of the number of possible functions or the effective support) into the unit interval [0,1] and is stored as float. Discuss why both scales are useful and how they appear in the six .tf feature files.",
+      "parent": "Information-Theory Background",
+      "page_notes": [
+        {
+          "content": "Show the conversion formulas with LaTeX:\n\nAbsolute (millibits): $\\text{mbit} = \\operatorname{round}(H \\times 1000)$ (integer)\n\nNormalized: $\\text{norm} = H / \\log_2 N$ (or effective support size) ∈ [0,1] (float)\n\nMention that the production notebook uses vectorized NumPy operations for both calculations."
+        }
+      ]
+    },
+    {
+      "title": "Feature Generation Pipeline",
+      "purpose": "High-level overview of the ETL pipeline that produces the six TF features: load N1904-TF via Text-Fabric → build per-datatype conditional probability tables P(f|d) → compute Shannon entropy (absolute + normalized) → map values back to word nodes → serialize .tf files. Link to the production notebook and the intermediate pickle page.",
+      "page_notes": [
+        {
+          "content": "Reference the Shannon formula when describing the entropy-calculation step, but keep the detailed mathematics on the Information-Theory pages."
+        }
+      ]
+    },
+    {
+      "title": "Production Notebook: create_entropy_type2pf_features.ipynb",
+      "purpose": "Deep dive into the main notebook. Describe how it loads the corpus, constructs the conditional probability distributions for the three datatypes (text, morph, lemma), computes Shannon entropy with vectorized NumPy, converts to millibits / normalized form, and writes the six .tf files under tf/1.0.0/. Note the role of the intermediate P_f_given_datatype.pkl.",
+      "parent": "Feature Generation Pipeline",
+      "page_notes": [
+        {
+          "content": "When describing the entropy computation cell, restate the core formula in LaTeX and note that the notebook produces both the millibit integers and the normalized floats from the same probability tables."
+        }
+      ]
+    },
+    {
+      "title": "Intermediate Data: P_f_given_datatype.pkl",
+      "purpose": "Document the serialized conditional-probability table. Explain what it stores (P(f|d) for every observed datatype form across the three keys), how the notebook generates it, and how subsequent cells use it to compute entropy without re-traversing the corpus.",
+      "parent": "Feature Generation Pipeline"
+    },
+    {
+      "title": "Output: Text-Fabric Feature Files",
+      "purpose": "Overview of the six .tf files produced in tf/1.0.0/. Cover shared conventions (metadata header with author, description, valueType, version, license; data body with implicit node numbering). Explain how the features are intended to be consumed from the N1904addons repository.",
+      "page_notes": [
+        {
+          "content": "Group the six files into three pairs (lemma, morph, text) and briefly recall that each pair contains an integer millibit feature and a float normalized feature."
+        }
+      ]
+    },
+    {
+      "title": "Lemma Entropy Features (lemma_entr_mbit / lemma_entr_norm)",
+      "purpose": "Detail the two lemma-based features: metadata fields, integer millibit encoding, float normalized encoding, value ranges, and typical usage via F.lemma_entr_mbit.v(node) / F.lemma_entr_norm.v(node) in Text-Fabric queries.",
+      "parent": "Output: Text-Fabric Feature Files"
+    },
+    {
+      "title": "Morph Entropy Features (morph_entr_mbit / morph_entr_norm)",
+      "purpose": "Detail the two morphology-based features. Highlight that the morphological tag (e.g. N-NSM) is the type key. Cover metadata, value ranges, and usage patterns.",
+      "parent": "Output: Text-Fabric Feature Files"
+    },
+    {
+      "title": "Surface-Text Entropy Features (text_entr_mbit / text_entr_norm)",
+      "purpose": "Detail the two surface-wordform features. Emphasize that the raw Greek wordform string is the type key. Cover metadata, value ranges, and usage. Reference the λόγος example where appropriate.",
+      "parent": "Output: Text-Fabric Feature Files"
+    },
+    {
+      "title": "Analysis and Visualization Notebooks",
+      "purpose": "Overview of the four supplementary notebooks that consume the generated features for validation, statistical analysis, case studies, and demonstration of downstream use (including RAG).",
+      "page_notes": [
+        {
+          "content": "These notebooks are consumers, not generators, of the entropy features."
+        }
+      ]
+    },
+    {
+      "title": "Explanatory Visuals Notebook: create_explanatory_visuals.ipynb",
+      "purpose": "Documents the visualization notebook: distribution plots, KL/JS divergence calculations between the three entropy types, PCA and t-SNE projections, and figure export conventions.",
+      "parent": "Analysis and Visualization Notebooks"
+    },
+    {
+      "title": "Case Study Notebook: John_1v1.ipynb",
+      "purpose": "Documents the John 1:1 case-study notebook. Shows how the entropy features are loaded via N1904addons, queried for specific verses, and compared across text/lemma/morph dimensions, often alongside syntactic tree renderings.",
+      "parent": "Analysis and Visualization Notebooks"
+    },
+    {
+      "title": "Z-Score Analysis Notebook: word_phrase_sentence_entropy_zscores.ipynb",
+      "purpose": "Documents the statistical normalization notebook that aggregates entropy at word, phrase, and sentence levels and applies Z-score standardization to surface statistically interesting patterns.",
+      "parent": "Analysis and Visualization Notebooks"
+    },
+    {
+      "title": "RAG Use-Case Notebook: use_case.ipynb",
+      "purpose": "Documents the Retrieval-Augmented Generation demonstration that uses the repository (and its derived features) as a knowledge source together with an Ollama LLM and a vector store.",
+      "parent": "Analysis and Visualization Notebooks"
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Precise definitions of all domain-specific and codebase-specific terms: Shannon entropy H(f|d), millibit, normalized entropy, datatype (text/morph/lemma), phrase function, P(f|d), Text-Fabric feature conventions, N1904-TF, N1904addons, etc. Include short pointers to the relevant source files or notebook cells.",
+      "page_notes": [
+        {
+          "content": "For the entropy entry, restate the canonical LaTeX formula one more time so the Glossary can serve as a quick reference."
+        }
+      ]
+    }
+  ]
+}
